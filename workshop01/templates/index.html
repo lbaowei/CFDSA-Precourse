@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CFDSA Precourse Assignment</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; 
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .header-div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: left;
+            gap: 20px; 
+        }
+        header img {
+            width: 150px; 
+            height: auto;
+        }
+
+        .repo-text {
+            text-align: center;
+            margin-top: 20px; /* Space between the image-header line and footer text */
+        }
+    </style>
+</head>
+<body>
+    <div>        
+        <div class="header-div">
+            <header>
+                <img src="{{ url_for('static', filename='odiemtndew.png') }}" alt="Image">   
+            </header>     
+                <h1>{{ header }}</h1> 
+        </div>
+        <div class="repo-text">
+            <p><b>Repository <a href="https://github.com/lbaowei/CFDSA-Precourse">https://github.com/lbaowei/CFDSA-Precourse</a></b></p>
+        </div>
+    </div>
+</body>
+</html>
