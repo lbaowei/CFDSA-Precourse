@@ -43,12 +43,12 @@ spec:
       containers:
       - name: bggapp
         image: stackupiss/bgg-backend:v1
-        # livelinessProbe:
-        #   httpGet:
-        #     path: /healthz
-        #     port: 3000
-        #   periodSeconds: 60
-        #   successThreshold: 1
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 3000
+          periodSeconds: 60
+          successThreshold: 1
         imagePullPolicy: IfNotPresent
         envFrom:
         - configMapRef:
