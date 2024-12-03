@@ -1,0 +1,30 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: dov-pod
+  namespace: myns
+  labels:
+    app: dov-bear
+spec: 
+  containers:
+  - name: dov-container
+    image: chukmunnlee/dov-bear:v5
+    imagePullPolicy: IfNotPresent
+    # env: 
+    # - name: INSTANCE_NAME
+    #   value: "not_my_dov_bear"
+    # - name: INSTANCE_HASH
+    #   valueFrom:
+    #     fieldRef:
+    #       fieldPath:  status.podIP
+    envFrom:
+    - configMapRef:
+        name: dov-cm
+    - secretRef:
+        name: dov-secret
+    ports:
+    - containerPort: 3000
+
+
+
