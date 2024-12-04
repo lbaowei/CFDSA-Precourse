@@ -1,0 +1,44 @@
+#namespace config map
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: vscodens
+  labels: 
+    app: vscode  
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fileloc-cm
+  namespace: vscodens
+  labels: 
+    app: vscode
+data:
+  FILE__MYVAR: /run/secrets/secret_vol:/run/secrets/cm_vol
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: vscode-cm
+  namespace: vscodens
+  labels: 
+    app: vscode
+data:
+  TZ: Asia/Singapore
+  DEFAULT_WORKSPACE: /config/workspace
+  PROXY_DOMAIN: code-146.190.201.32.nip.io
+  # FILE__MYVAR: /run/secrets/secret_vol
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: vscode-secret
+  namespace: vscodens
+  labels: 
+    app: vscode
+data:
+  PASSWORD: cGFzc3dvcmQ=
+  #PASSWORD: c2VuZGhlbHA=
+  SUDO_PASSWORD: cGFzc3dvcmQ=
+  

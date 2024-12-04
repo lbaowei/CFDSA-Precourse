@@ -1,0 +1,91 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vscode-svc
+  namespace: vscodens
+  labels:
+    app: vscode
+spec:
+  type: ClusterIP
+  selector:
+    app: vscode
+  ports:
+  - name: web
+    port: 8443         # Service port
+    targetPort: 8443   # Container port
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vscode-deploy
+  namespace: vscodens
+  labels:
+    app: vscode
+    role: app
+spec:
+  replicas: 1
+  selector: 
+    matchLabels:
+      app: vscode
+      role: app
+  template:
+    metadata:
+      name: vscode-pod
+      namespace: vscodens
+      labels:
+        app: vscode
+        role: app
+    spec: 
+      volumes:
+      - name: workspace-vol
+        persistentVolumeClaim:
+          claimName: vscode-pvc
+      # - name: vscode-cm-vol
+      #   configMap: 
+      #     name: vscode-cm
+      # - name: vscode-secret-vol 
+      #   secret:
+      #     secretName: vscode-secret
+      containers:
+      - name: code-server
+        image: linuxserver/code-server:amd64-4.95.3
+        imagePullPolicy: IfNotPresent
+        envFrom:
+        # - configMapRef:
+        #     name: fileloc-cm
+        - configMapRef:
+            name: vscode-cm
+        - secretRef:
+            name: vscode-secret
+        ports:
+        - containerPort: 8443
+        volumeMounts:
+        - name: workspace-vol
+          mountPath: /config/workspace
+        # - name: vscode-cm-vol
+        #   mountPath: /run/secrets/cm_vol
+        # - name: vscode-secret-vol
+        #   mountPath: /run/secrets/secret_vol
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: vscode-img
+  namespace: vscodens
+  labels:
+    app: vscode
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: code-146.190.201.32.nip.io #must put else will match anything
+    http:
+      paths:
+      - path: / #any request starting with / will come here
+        pathType: Prefix
+        backend:
+          service:
+            name: vscode-svc
+            port:
+              number: 8443
+
