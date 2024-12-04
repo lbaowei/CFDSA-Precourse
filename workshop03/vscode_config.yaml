@@ -15,7 +15,8 @@ metadata:
   labels: 
     app: vscode
 data:
-  FILE__MYVAR: /run/secrets/secret_vol:/run/secrets/cm_vol
+  FILE__PASSWORD: /run/secrets/secret_vol/PASSWORD
+  FILE__SUDO_PASSWORD: /run/secrets/secret_vol/SUDO_PASSWORD
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -28,7 +29,6 @@ data:
   TZ: Asia/Singapore
   DEFAULT_WORKSPACE: /config/workspace
   PROXY_DOMAIN: code-146.190.201.32.nip.io
-  # FILE__MYVAR: /run/secrets/secret_vol
 ---
 apiVersion: v1
 kind: Secret
