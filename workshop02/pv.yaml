@@ -1,0 +1,13 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: bggdb-pvc
+  namespace: bggns
+spec:
+  storageClassName: do-block-storage
+  accessModes: #look for a volume that supports both characteristics
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi #minimum for digital ocean

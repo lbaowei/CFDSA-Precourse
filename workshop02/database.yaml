@@ -38,11 +38,16 @@ spec:
         app: bgg
         role: db
     spec: 
+      volumes:
+      - name: data-vol
+        persistentVolumeClaim:
+          claimName: bggdb-pvc
       containers:
       - name: bggdb
         image: stackupiss/bgg-database:v1
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 3306
-
-
+        volumeMounts:
+        - name: data-vol
+          mountPath: /var/lib/mysql
