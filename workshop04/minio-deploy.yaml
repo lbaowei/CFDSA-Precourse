@@ -77,10 +77,10 @@ spec:
         - containerPort: 9000
         resources: 
           requests:
-            memory: 256M
+            memory: 512M
             cpu: 200m
           limits:
-            memory: 512M
+            memory: 896M
             cpu: 200m
         volumeMounts:
         - name: data-vol          
@@ -144,6 +144,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: minio-hsvc
+            name: minio-svc
             port:
               name: console 
