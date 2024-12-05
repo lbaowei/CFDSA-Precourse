@@ -10,17 +10,6 @@ metadata:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: fileloc-cm
-  namespace: vscodens
-  labels: 
-    app: vscode
-data:
-  FILE__PASSWORD: /run/secrets/secret_vol/PASSWORD
-  FILE__SUDO_PASSWORD: /run/secrets/secret_vol/SUDO_PASSWORD
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
   name: vscode-cm
   namespace: vscodens
   labels: 
@@ -38,7 +27,7 @@ metadata:
   labels: 
     app: vscode
 data:
-  PASSWORD: cGFzc3dvcmQ=
-  #PASSWORD: c2VuZGhlbHA=
-  SUDO_PASSWORD: cGFzc3dvcmQ=
+  PASSWORD: c2VuZGhlbHA=
+  #PASSWORD: c2VuZGhlbHA= cGFzc3dvcmQ=
+  SUDO_PASSWORD: c2VuZGhlbHA=
   

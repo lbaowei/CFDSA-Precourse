@@ -45,19 +45,12 @@ spec:
       - name: workspace-vol
         persistentVolumeClaim:
           claimName: vscode-pvc
-      # - name: vscode-cm-vol
-      #   configMap: 
-      #     name: vscode-cm
-      # - name: vscode-secret-vol 
-      #   secret:
-      #     secretName: vscode-secret
+
       containers:
       - name: code-server
         image: linuxserver/code-server:amd64-4.95.3
         imagePullPolicy: IfNotPresent
         envFrom:
-        # - configMapRef:
-        #     name: fileloc-cm
         - configMapRef:
             name: vscode-cm
         - secretRef:
@@ -68,10 +61,6 @@ spec:
         volumeMounts:
         - name: workspace-vol
           mountPath: /config/workspace
-        # - name: vscode-cm-vol
-        #   mountPath: /run/secrets/cm_vol
-        # - name: vscode-secret-vol
-        #   mountPath: /run/secrets/secret_vol
         
         resources: #influence scheduling
           requests:
